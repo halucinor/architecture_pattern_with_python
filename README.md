@@ -136,3 +136,15 @@ class Batch:
                     raise OutOfStock(f"Out of stock for sku : {line.sku}")
 
     ```
+
+### Chapter 2. 저장소 패턴
+
+#### 양파 아키텍처
+
+#### 의존성
+
+#### ORM과 모델의 의존관계 역전
+
+#### 저장소 패턴
+
+#### 도메인 모델의 트레이드 오프
