@@ -7,11 +7,14 @@ class OutOfStock(Exception):
     ...
 
 
-@dataclass(frozen=True)
+@dataclass
 class OrderLine:
     ref: str
     sku: str
     qty: int
+
+    def __hash__(self):
+        return hash(self.ref)
 
 
 class Batch:
