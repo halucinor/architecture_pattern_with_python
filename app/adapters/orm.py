@@ -1,9 +1,9 @@
-from sqlalchemy.orm import mapper, relationship
+from sqlalchemy.orm import relationship
 from sqlalchemy.orm import registry
 from sqlalchemy import MetaData, Table, ForeignKey
 from sqlalchemy import Column, Integer, String
 
-from app import model
+from app.domain import model
 
 metadata = MetaData()
 mapper_registry = registry()

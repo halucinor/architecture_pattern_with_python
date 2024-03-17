@@ -1,4 +1,4 @@
-from model import Batch, OrderLine, allocate, OutOfStock
+from app.domain.model import Batch, OrderLine, allocate, OutOfStock
 from datetime import date, timedelta
 import pytest
 def test_prefers_warehouse_batches_to_shipments():

@@ -1,4 +1,4 @@
-from app import model
+from app.domain import model
 from sqlalchemy import text
 
 

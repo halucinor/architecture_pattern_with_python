@@ -1,5 +1,5 @@
-from app.model import Batch, OrderLine, allocate, OutOfStock
-from app import repository
+from app.domain.model import Batch, OrderLine
+from app.adapters import repository
 from sqlalchemy import text
 
 

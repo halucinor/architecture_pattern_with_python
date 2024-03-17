@@ -1,4 +1,4 @@
-from model import Batch, OrderLine
+from app.domain.model import Batch, OrderLine
 from datetime import date, timedelta
 
 today = date.today()

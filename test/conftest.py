@@ -5,9 +5,9 @@ import requests
 from requests.exceptions import ConnectionError
 
 from sqlalchemy import create_engine, text
-from sqlalchemy.orm import session, sessionmaker, clear_mappers
+from sqlalchemy.orm import sessionmaker, clear_mappers
 from sqlalchemy.exc import OperationalError
-from app.orm import metadata, start_mappers
+from app.adapters.orm import metadata, start_mappers
 from app.config import get_postgres_url, get_api_url
 
 
@@ -48,15 +48,13 @@ def postgres_db():
     engine = create_engine(get_postgres_url())
     wait_for_postgres_to_come_up(engine)
     metadata.create_all(engine)
-    yield engine
-    metadata.drop_all(engine)
-    engine.dispose()
-
+    return engine
 
 @pytest.fixture
 def postgres_session(postgres_db):
     start_mappers()
-    yield sessionmaker(bind=postgres_db)()
+    session = sessionmaker(bind=postgres_db)()
+    yield session
     clear_mappers()
 
 
@@ -78,7 +76,8 @@ def add_stock(postgres_session):
             )
             batches_added.add(batch_id)
             sku_added.add(sku)
-        postgres_session.commit()
+
+            postgres_session.commit()
 
     yield _add_stock
 

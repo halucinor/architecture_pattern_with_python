@@ -1,5 +1,5 @@
 import abc
-from app import model
+from app.domain import model
 
 
 class AbstractRepository(abc.ABC):
@@ -9,6 +9,10 @@ class AbstractRepository(abc.ABC):
 
     @abc.abstractmethod
     def get(self, entity_id):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def list(self):
         raise NotImplementedError
 
 
