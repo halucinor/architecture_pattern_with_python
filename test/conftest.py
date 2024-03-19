@@ -22,6 +22,17 @@ def session():
     engine.dispose()
 
 
+@pytest.fixture
+def session_factory():
+    engine = create_engine('sqlite:///:memory:')
+    metadata.create_all(engine)
+    start_mappers()
+    yield sessionmaker(engine)
+    clear_mappers()
+    metadata.drop_all(engine)
+    engine.dispose()
+
+
 def wait_for_postgres_to_come_up(engine):
     deadline = time.time() + 10
     while time.time() < deadline:
@@ -49,6 +60,7 @@ def postgres_db():
     wait_for_postgres_to_come_up(engine)
     metadata.create_all(engine)
     return engine
+
 
 @pytest.fixture
 def postgres_session(postgres_db):
